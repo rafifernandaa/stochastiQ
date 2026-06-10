@@ -1,5 +1,3 @@
-![StochastiQ Banner](assets/stochastiq_banner.png)
-
 # StochastiQ 🎲
 
 **Enterprise Certification for Probabilistic Reasoning Competency**
