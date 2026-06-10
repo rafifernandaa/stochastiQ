@@ -1,486 +1,227 @@
-Good. The full system is working end to end.
+![StochastiQ Banner](assets/stochastiq_banner.png)
 
+# StochastiQ 🎲
 
+**Enterprise Certification for Probabilistic Reasoning Competency**
 
-Now do one final integration test before we move to documentation and submission:
+[![Hackathon](https://img.shields.io/badge/Microsoft%20Agents%20League-Reasoning%20Agents%20Track-blue.svg)](#)
+[![Agent Framework](https://img.shields.io/badge/Framework-Microsoft%20Agent%20Framework-orange.svg)](#)
+[![LLM](https://img.shields.io/badge/LLM-GPT--4o-blueviolet.svg)](#)
+[![License](https://img.shields.io/badge/License-MIT-green.svg)](#)
 
+> AI that reasons through stochastic problems alongside your team — not just at them.
 
+---
 
-\*\*Test the four assessment scenarios through the UI:\*\*
+## What is StochastiQ?
 
+StochastiQ is a multi-agent enterprise certification system that verifies data scientists and researchers actually understand the probabilistic models they use — not just the tools. 
 
+Built for the **Microsoft Agents League Hackathon — Reasoning Agents Track**, StochastiQ addresses a critical gap: organizations frequently certify teams on software tools and APIs, but rarely on the foundational statistical and probabilistic theory required to apply them correctly.
 
-In the sidebar, change the scenario dropdown to each of these and click "Run Assessment" each time:
+---
 
-1\. Poisson Process (Laser Counts)
+## The Problem
 
-2\. Lévy Process (Burst Events)
+A data scientist can easily be certified on Python, SQL, or Azure — but:
+- Can they identify whether a real-world stochastic process is memoryless?
+- Can they detect a heavy-tailed distribution and explain why a standard Poisson model fails?
+- Can they mathematically justify switching to a compound process?
 
-3\. Exponential Inter-arrivals
+These theoretical foundations determine whether probabilistic models are applied correctly or fail catastrophically in production. **StochastiQ certifies exactly this.**
 
-4\. Unknown Mixed Process ⚠️
+---
 
+## Multi-Agent Architecture
 
+StochastiQ uses a modular multi-agent system to handle routing, learning path curation, personalized reminders, and deep statistical reasoning.
 
-Tell me if all four render correctly in the UI — specifically that the metric cards show the right PASS/FAIL and the reasoning trace is visible.
+```mermaid
+graph TD
+    User([Learner / Manager]) --> Orch[Orchestrator Agent<br/><i>Intent Routing</i>]
+    Orch --> LC["Learning Path Curator (LC)<br/><small>Foundry IQ Pattern</small>"]
+    Orch --> SP["Study Plan Generator (SP)<br/><small>Fabric IQ Pattern</small>"]
+    Orch --> AA["Assessment Agent (AA)<br/><small>Statistical Engine + GPT-4o</small>"]
+    Orch --> EA["Engagement Agent (EA)<br/><small>Work IQ Pattern</small>"]
+    Orch --> MI["Manager Insights (MI)<br/><small>Synthetic Learner Dataset</small>"]
 
-
-
-While you test that, here's what we're building next in parallel — the README which is a judging criterion:
-
-
-
-Create `README.md`:
-
-
-
-```markdown
-
-\# StochastiQ 🎲
-
-\*\*Enterprise Certification for Probabilistic Reasoning Competency\*\*
-
-
-
-> AI that reasons through stochastic problems alongside your team — 
-
-> not just at them.
-
-
-
-\## What is StochastiQ?
-
-
-
-StochastiQ is a multi-agent enterprise certification system that 
-
-verifies data scientists and researchers actually understand the 
-
-probabilistic models they use — not just the tools.
-
-
-
-Built for the \*\*Microsoft Agents League Hackathon — Reasoning Agents 
-
-Track\*\*, StochastiQ addresses a real gap: organizations certify teams 
-
-on software tools but rarely on the statistical foundations underneath.
-
-
-
-\## The Problem
-
-
-
-A data scientist can be certified on Python, SQL, or Azure — but can 
-
-they identify whether a stochastic process is memoryless? Can they 
-
-detect a heavy-tailed distribution, explain why a Poisson model fails, 
-
-and switch to a compound process? These are the skills that determine 
-
-whether probabilistic models are used correctly in production.
-
-
-
-StochastiQ certifies exactly this.
-
-
-
-\## Multi-Agent Architecture
-
-
-
+    style Orch fill:#7c3aed,stroke:#5b21b6,stroke-width:2px,color:#fff
+    style AA fill:#0891b2,stroke:#0e7490,stroke-width:2px,color:#fff
+    style LC fill:#16a34a,stroke:#15803d,stroke-width:2px,color:#fff
+    style SP fill:#2563eb,stroke:#1d4ed8,stroke-width:2px,color:#fff
 ```
 
-User (Learner / Manager)
+### Agent Roles and Grounding
 
-&#x20;        ↓
+| Agent | Role | Grounding Layer |
+| :--- | :--- | :--- |
+| **Learning Path Curator (LC)** | Recommends the next learning module based on user's role and history. | **Knowledge Base**: Grounded on Sheldon Ross's *Introduction to Probability Models* excerpts. |
+| **Study Plan Generator (SP)** | Builds a capacity-aware study schedule for the learner. | **Fabric IQ Pattern**: Semantic mapping of roles, modules, and prerequisites. |
+| **Assessment Agent (AA)** | Reasons step-by-step through complex stochastic problems. | **Statistical Engine**: Executed against actual tests (KS, chi-square) + GPT-4o. |
+| **Engagement Agent (EA)** | Personalizes study reminders based on work context. | **Work IQ Pattern**: Real-time signals from meeting calendars and focus hour slots. |
+| **Manager Insights (MI)** | Summarizes team readiness, skill gaps, and risk flags. | **Synthetic Datasets**: Aggregated assessment analytics for management. |
 
-&#x20; Orchestrator Agent
+---
 
-&#x20; (intent routing)
+## The Assessment Agent — Core Innovation
 
-&#x20;   ↙  ↓  ↓  ↘  ↘
-
-\[1]  \[2]  \[3]  \[4]  \[5]
-
-&#x20;LC   SP   AA   EA   MI
-
-```
-
-
-
-| Agent | Role | Grounding |
-
-|---|---|---|
-
-| Learning Path Curator (LC) | Recommends next module by role | Knowledge Base (Foundry IQ pattern) |
-
-| Study Plan Generator (SP) | Builds capacity-aware study schedule | Fabric IQ pattern (semantic role-module mapping) |
-
-| Assessment Agent (AA) | Reasons through stochastic problems step by step | Statistical Engine + GPT-4o |
-
-| Engagement Agent (EA) | Personalizes reminders to work context | Work IQ pattern (meeting/focus signals) |
-
-| Manager Insights (MI) | Team readiness and risk summary | Synthetic learner dataset |
-
-
-
-\## The Assessment Agent — Core Innovation
-
-
-
-The Assessment Agent is what makes StochastiQ different from a 
-
-quiz app. It follows a strict 5-step reasoning protocol:
-
-
+Unlike simple quiz applications, the **Assessment Agent** does not just grade answers; it follows a rigorous 5-step reasoning protocol grounded in statistical reality:
 
 ```
-
-STEP 1 — EXPLORE    → Descriptive statistics, tail behavior, VMR
-
-STEP 2 — HYPOTHESIZE → 2 candidate models with theoretical justification
-
-STEP 3 — TEST       → Goodness-of-fit tests (KS, chi-square)
-
-STEP 4 — REFLECT    → Model rejection with explicit reasoning
-
-STEP 5 — CONCLUDE   → Best-fit model, parameters, extreme event probability
-
+[STEP 1 — EXPLORE]     📊 Calculate descriptive statistics, check variance-to-mean ratio (VMR), evaluate tail behavior.
+[STEP 2 — HYPOTHESIZE] 💡 Propose 2 candidate models with rigorous mathematical justification.
+[STEP 3 — TEST]        🧪 Run goodness-of-fit statistical tests (e.g., Kolmogorov-Smirnov, Chi-Square).
+[STEP 4 — REFLECT]     🧐 Critique the models, reject candidates with explicit mathematical reasoning.
+[STEP 5 — CONCLUDE]    🏆 Select best-fit model, solve for parameters, and estimate extreme-event probabilities.
 ```
 
+Every response is grounded in Ross's *Introduction to Probability Models* and evaluated against a live statistical engine — **no hallucinated test results.**
 
+### Example: Ambiguous Mixed Process
 
-Every step is grounded in Ross's \*Introduction to Probability Models\* 
+When a learner submits complex burst data that violates simple assumptions:
+1. **Poisson Model Fails:** The engine computes $\text{VMR} = 9.78$, proving equidispersion is severely violated.
+2. **Negative Binomial Fails:** The extreme kurtosis ($\text{Kurt} = 24.27$) exceeds the model's analytical threshold.
+3. **Agent Action:** Correctly identifies a compound **Poisson-Gamma** process, cites Ross Chapter 6 on compound distributions, and suggests AIC/BIC model selection criteria as the next diagnostic step.
 
-and executed against real statistical tests — not simulated outputs.
+---
 
+## Microsoft IQ Integration
 
+We leverage three key design patterns from Microsoft IQ to build a cohesive enterprise agent system:
 
-\### Example: Ambiguous Mixed Process
+| Layer | Design Pattern | Implementation Detail |
+| :--- | :--- | :--- |
+| **Foundry IQ** | *Knowledge Base Integration* | Grounding of the **Learning Path Curator** and **Assessment Agent** using curated Ross textbook excerpts and the official certification syllabus. |
+| **Fabric IQ** | *Semantic Data Access* | Semantic mapping of learner roles to certification requirements, automatically checking module prerequisites and performance thresholds. |
+| **Work IQ** | *Work Context Integration* | Extraction of workplace metrics (meeting hours, focus blocks, and preferred study times) to optimize reminder delivery via the **Engagement Agent**. |
 
+---
 
+## Tech Stack
 
-When a learner submits burst data that follows no simple distribution:
+- **Agent Orchestration:** Microsoft Agent Framework (Local implementation)
+- **Large Language Model:** GitHub-hosted `gpt-4o` via GitHub Models
+- **Statistical Engine:** Python (`scipy`, `numpy`, `statsmodels`)
+- **User Interface:** Streamlit (Clean, dark-themed dashboard)
+- **Version Control:** Git & GitHub
 
+> [!NOTE]
+> **Deployment Architecture:** The code is designed for the **Foundry Agent Service** (Hosted Agents). While this hackathon repository runs locally, the production path deploys via Azure Container Registry (ACR) to the Foundry Agent Service.
 
+---
 
-\- Poisson FAILS (VMR=9.78, equidispersion violated)
+## Certification Curriculum
 
-\- Negative Binomial FAILS (extreme kurtosis=24.27 exceeds model capacity)
+| Module | Topic | Textbook Reference (Ross) | Passing Threshold |
+| :---: | :--- | :--- | :---: |
+| **1** | Discrete Random Variables | Chapter 2 | 75% |
+| **2** | Conditional Probability & Bayes | Chapter 3 | 75% |
+| **3** | Poisson Process | Chapter 5 | 80% |
+| **4** | Markov Chains | Chapter 4 | 80% |
+| **5** | Heavy-Tailed Distributions | Chapters 2 & 6 | 85% |
 
-\- Agent correctly identifies compound Poisson-Gamma process
+---
 
-\- Cites Ross Chapter 6 on compound distributions
+## Assessment Scenarios
 
-\- Recommends AIC/BIC model selection as next step
+Learners are tested on real-time simulated processes:
 
+| Scenario | Process Type | Primary Statistical Test | Expected Analysis Outcome |
+| :--- | :--- | :--- | :--- |
+| **Poisson** | Laser photon counts | Chi-Square Goodness-of-Fit | Confirms $\text{VMR} \approx 1$, estimates rate parameter $\lambda$. |
+| **Lévy** | Burst intensity fluctuations | Kolmogorov-Smirnov (KS) | Heavy tail confirmed; quantifies extreme tail-event probability. |
+| **Exponential** | Inter-arrival times | Kolmogorov-Smirnov (KS) | Evaluates memoryless property and arrival rate. |
+| **Ambiguous** | Unknown mixed process | Multiple tests | Rejects simple models $\rightarrow$ argues for compound Poisson-Gamma. |
 
+---
 
-This is the kind of reasoning that cannot be faked with a lookup table.
-
-
-
-\## Microsoft IQ Integration
-
-
-
-| Layer | Implementation |
-
-|---|---|
-
-| \*\*Foundry IQ\*\* | Knowledge base pattern: Ross module excerpts + certification framework grounding all Curator and Assessment responses |
-
-| \*\*Fabric IQ\*\* | Semantic layer pattern: role → module → prerequisite → threshold mapping drives Study Plan Generator |
-
-| \*\*Work IQ\*\* | Work context pattern: meeting hours + focus hours + preferred slot drives Engagement Agent timing |
-
-
-
-\## Tech Stack
-
-
-
-| Component | Technology |
-
-|---|---|
-
-| Agent Orchestration | Microsoft Agent Framework (local) |
-
-| LLM | GitHub-hosted GPT-4o via GitHub Models |
-
-| Statistical Engine | Python (scipy, numpy, statsmodels) |
-
-| UI | Streamlit |
-
-| Version Control | GitHub |
-
-
-
-> \*\*Deployment note\*\*: Architecture is designed for Foundry Agent 
-
-> Service (Hosted Agents). Local deployment is the hackathon prototype; 
-
-> cloud deployment via Azure Container Registry → Foundry Agent Service 
-
-> is the production path.
-
-
-
-\## Certification Modules
-
-
-
-| Module | Topic | Ross Chapter | Threshold |
-
-|---|---|---|---|
-
-| 1 | Discrete Random Variables | Ch. 2 | 75% |
-
-| 2 | Conditional Probability \& Bayes | Ch. 3 | 75% |
-
-| 3 | Poisson Process | Ch. 5 | 80% |
-
-| 4 | Markov Chains | Ch. 4 | 80% |
-
-| 5 | Heavy-Tailed Distributions | Ch. 2, 6 | 85% |
-
-
-
-\## Assessment Scenarios
-
-
-
-| Scenario | Process | Key Test | Expected Outcome |
-
-|---|---|---|---|
-
-| Poisson | Laser photon counts | Chi-square | Confirms VMR≈1, λ estimated |
-
-| Lévy | Burst intensity fluctuations | KS test | Heavy tail confirmed, extreme event risk quantified |
-
-| Exponential | Inter-arrival times | KS test | Memoryless property supported |
-
-| Ambiguous | Mixed burst process | Both | Both models fail → compound process reasoning |
-
-
-
-\## Synthetic Data
-
-
-
-All data in this project is synthetic and generated programmatically. 
-
-No real employee data, customer data, or PII is used anywhere.
-
-
-
-Learner IDs follow the pattern SQ-001 through SQ-004.
-
-All scenarios are generated via `tools/statistical\_engine.py` 
-
-using numpy random seeds for reproducibility.
-
-
-
-\## Setup
-
-
-
-```bash
-
-git clone https://github.com/rafifernandaa/stochastiQ
-
-cd stochastiQ
-
-python -m venv .venv
-
-.venv\\Scripts\\activate  # Windows
-
-pip install -r requirements.txt
-
-cp .env.example .env
-
-\# Add your GITHUB\_TOKEN to .env
-
-streamlit run app.py
+## Project Structure
 
 ```
-
-
-
-\## Environment Variables
-
-
-
-```bash
-
-\# .env
-
-GITHUB\_TOKEN=your\_github\_personal\_access\_token
-
-AZURE\_AI\_MODEL\_DEPLOYMENT=gpt-4o
-
-```
-
-
-
-\## Project Structure
-
-
-
-```
-
 stochastiQ/
-
 ├── agents/
-
-│   ├── orchestrator.py          # Intent routing
-
-│   ├── assessment\_agent.py      # Core reasoning agent
-
-│   └── supporting\_agents.py     # LC, SP, EA, MI agents
-
+│   ├── orchestrator.py        # Orchestrates and routes user intent
+│   ├── assessment_agent.py    # Core 5-step reasoning agent
+│   └── supporting_agents.py   # LC, SP, EA, and MI agents
 ├── tools/
-
-│   └── statistical\_engine.py    # scipy-based stats engine
-
-├── knowledge\_base/              # Synthetic Ross excerpts
-
-├── synthetic\_data/              # Synthetic learner data
-
-├── app.py                       # Streamlit UI
-
-├── requirements.txt
-
-├── .env.example
-
-└── README.md
-
+│   └── statistical_engine.py  # SciPy & Statsmodels calculation engine
+├── knowledge_base/            # Textbook chapters & syllabus guidelines
+├── synthetic_data/            # Synthetic learner records & logs
+├── assets/
+│   └── stochastiq_banner.png  # Project banner image
+├── app.py                     # Streamlit web application
+├── requirements.txt           # Python package dependencies
+├── .env.example               # Template for environment variables
+└── README.md                  # Project documentation (this file)
 ```
 
+---
 
+## Setup & Local Installation
 
-\## Responsible AI
+### Prerequisites
+- Python 3.10 or 3.11
+- A GitHub Personal Access Token (with access to GitHub Models)
 
+### Installation Steps
 
+1. **Clone the Repository:**
+   ```bash
+   git clone https://github.com/rafifernandaa/stochastiQ.git
+   cd stochastiQ
+   ```
 
-\- All outputs are clearly labeled as AI-generated
+2. **Set Up a Virtual Environment:**
+   ```bash
+   python -m venv .venv
+   # Activate on Windows:
+   .venv\Scripts\activate
+   # Activate on macOS/Linux:
+   source .venv/bin/activate
+   ```
 
-\- Statistical conclusions are grounded in actual test results,
+3. **Install Dependencies:**
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-&#x20; never hallucinated
+4. **Configure Environment Variables:**
+   ```bash
+   cp .env.example .env
+   ```
+   Open the `.env` file and replace `your_github_personal_access_token_here` with your actual GitHub token.
 
-\- Synthetic data only — no PII anywhere in the codebase
+5. **Run the Streamlit Dashboard:**
+   ```bash
+   streamlit run app.py
+   ```
 
-\- Agent reasoning is fully transparent and auditable
+---
 
-\- Model failures are reported honestly, not hidden
+## Environment Variables
 
-
-
-\## Alignment to Challenge Scenario
-
-
-
-StochastiQ implements the full enterprise learning system scenario:
-
-
-
-| Official Requirement | StochastiQ Implementation |
-
-|---|---|
-
-| Certification programme management | 5-module stochastic reasoning curriculum |
-
-| Role-based study plans | 4 roles × module prerequisites |
-
-| Grounded practice questions | Statistical scenarios grounded in Ross |
-
-| Progress feedback | Engagement Agent with work context |
-
-| Manager insights | Team readiness dashboard with risk flagging |
-
-| Multi-agent orchestration | 5 agents + orchestrator routing layer |
-
-| Microsoft IQ integration | Foundry IQ + Fabric IQ + Work IQ patterns |
-
-
-
-\## License
-
-
-
-MIT — see LICENSE file.
-
-```
-
-
-
-\---
-
-
-
-Now create `requirements.txt`:
-
-
-
-```text
-
-openai>=1.0.0
-
-azure-ai-projects
-
-azure-ai-agents
-
-scipy>=1.11.0
-
-numpy>=1.24.0
-
-statsmodels>=0.14.0
-
-matplotlib>=3.7.0
-
-streamlit>=1.28.0
-
-python-dotenv>=1.0.0
-
-```
-
-
-
-And `.env.example`:
-
-
+The application requires the following environment configurations in your `.env` file:
 
 ```bash
+# GitHub personal access token for model access
+GITHUB_TOKEN=your_github_personal_access_token_here
 
-GITHUB\_TOKEN=your\_github\_personal\_access\_token\_here
-
-AZURE\_AI\_MODEL\_DEPLOYMENT=gpt-4o
-
+# LLM model identifier
+AZURE_AI_MODEL_DEPLOYMENT=gpt-4o
 ```
 
+---
 
+## Responsible AI & Data Transparency
 
-\---
+- **Synthetic Data Only:** All user profiles, learning statistics, and process streams in this project are programmatically generated. No real employee data or PII is used.
+- **Transparency:** The Assessment Agent's reasoning trace is fully visible to the user at run-time, allowing auditability of its intermediate calculations.
+- **Grounded Outputs:** The statistical conclusions (parameters, test statistics, p-values) are computed using scipy/numpy, not LLM guesses.
+- **Honest Failures:** The agent reports goodness-of-fit model rejections transparently rather than forcing a fit.
 
+---
 
+## License
 
-\*\*Once UI tests pass, three things left:\*\*
-
-
-
-1\. Push everything to GitHub
-
-2\. Record demo video
-
-3\. Submit via GitHub issue
-
-
-
-Tell me which UI scenarios passed and we move to the submission checklist.
-
+This project is licensed under the **MIT License** - see the LICENSE file for details.
